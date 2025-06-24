@@ -1,0 +1,40 @@
+#!/bin/bash
+
+
+# Install PipeWire and related packages
+echo "Installing PipeWire and required packages..."
+sudo pacman -S --noconfirm pipewire pipewire-pulse pipewire-alsa pipewire-jack pavucontrol
+
+# Enable and start PipeWire services
+echo "Enabling and starting PipeWire services..."
+
+# Enable PipeWire
+sudo systemctl --user enable pipewire
+sudo systemctl --user start pipewire
+
+# Enable PipeWire PulseAudio compatibility
+sudo systemctl --user enable pipewire-pulse
+sudo systemctl --user start pipewire-pulse
+
+# Enable and start the WirePlumber session manager (optional, recommended for full compatibility)
+echo "Enabling and starting WirePlumber session manager..."
+sudo systemctl --user enable wireplumber
+sudo systemctl --user start wireplumber
+
+# Check if PipeWire services are active
+echo "Checking if PipeWire services are running..."
+if systemctl --user is-active --quiet pipewire && systemctl --user is-active --quiet pipewire-pulse; then
+    echo "PipeWire and PipeWire PulseAudio services are running successfully."
+else
+    echo "PipeWire failed to start. Please check for issues."
+    exit 1
+fi
+
+# Start pavucontrol GUI
+echo "Starting pavucontrol (PulseAudio Volume Control)..."
+pavucontrol &
+
+# Inform the user
+echo "PipeWire setup is complete. You can now use the pavucontrol GUI to manage audio settings."
+echo "If pavucontrol doesn't open automatically, run it using 'pavucontrol' in the terminal."
+

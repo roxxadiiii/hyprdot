@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+set -x  # Enable debug mode
+
+# Usage: ./remove_duplicates.sh /path/to/dir
+dir="${1:-.}"
+
+# Use associative array to store checksums
+declare -A file_hash_map
+
+# Temporary file to store hash list
+tempfile=$(mktemp)
+
+# Efficiently find all files and compute hashes
+find "$dir" -type f -print0 | while IFS= read -r -d '' file; do
+    # Compute sha256sum and store
+    sha256sum "$file"
+done > "$tempfile"
+
+# Read and process hashes
+while IFS= read -r line; do
+    hash=$(echo "$line" | awk '{print $1}')
+    filepath=$(echo "$line" | cut -d' ' -f3-)
+
+    # Check if hash exists
+    if [[ -n "${file_hash_map[$hash]:-}" ]]; then
+        echo "Duplicate: $filepath"
+        echo "Original: ${file_hash_map[$hash]}"
+        rm -v "$filepath"
+    else
+        file_hash_map["$hash"]="$filepath"
+    fi
+done < "$tempfile"
+
+rm -f "$tempfile"
+echo "✅ Done removing duplicates."
+

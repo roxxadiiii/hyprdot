@@ -1,0 +1,32 @@
+#!/bin/bash
+
+
+# Install Bluetooth utilities and GUI
+echo "Installing Bluetooth utilities and GUI..."
+sudo pacman -S --noconfirm bluez bluez-utils blueman
+
+# Enable Bluetooth services
+echo "Enabling and starting Bluetooth services..."
+sudo systemctl enable bluetooth
+sudo systemctl start bluetooth
+
+# Enable the necessary services for Bluetooth to work
+sudo systemctl enable bluetooth.service
+sudo systemctl start bluetooth.service
+
+# Check if Bluetooth is running
+echo "Checking if Bluetooth is running..."
+if systemctl is-active --quiet bluetooth; then
+    echo "Bluetooth is running successfully."
+else
+    echo "Bluetooth failed to start."
+    exit 1
+fi
+
+# Start Blueman GUI
+echo "Starting Blueman Bluetooth manager..."
+blueman-manager &
+
+# Inform the user
+echo "Bluetooth should now be working. Blueman GUI should be open. If not, launch it manually using 'blueman-manager'."
+
