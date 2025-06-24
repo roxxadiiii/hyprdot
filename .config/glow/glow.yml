@@ -1,0 +1,5 @@
+style: dracula   # Options: dark, light, auto, dracula, etc.
+width: 100       # Width of rendered markdown
+pager: true      # Use pager like 'less'
+local: true      # Only show local markdown files
+mouse: true      # Enable mouse support in the TUI
