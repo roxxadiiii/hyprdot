@@ -1,8 +1,0 @@
-#!/bin/sh
-
-#set the music dir
-MUSIC_DIR="$HOME/Music"
-
-#find music files and select one using fzf
-
-SELECTED_FILE=$(find "$MUSIC_DIR") -type f -iname 

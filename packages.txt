@@ -1,0 +1,13 @@
+hyprland
+kitty
+kitty-shell-integration
+kitty-terminfo
+udisks2
+swww
+hyprpolkitagent
+python-pywal16
+qt5ct
+qt6ct
+mpv-full
+ffmpeg4
+ffmpeg-thumbnailer
