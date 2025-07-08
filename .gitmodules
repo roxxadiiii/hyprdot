@@ -1,0 +1,6 @@
+[submodule ".local"]
+	path = .local
+	url = https://github.com/roxxadiiii/bin
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = https://github.com/roxxadiiii/nvim
