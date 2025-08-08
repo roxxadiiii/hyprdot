@@ -1,0 +1,16 @@
+#!/bin/sh
+codium-insiders --install-extension PKief.material-product-icons
+codium-insiders --install-extension esbenp.prettier-vscode
+codium-insiders --install-extension formulahendry.code-runner
+codium-insiders --install-extension ritwickdey.LiveServer
+codium-insiders --install-extension PKief.material-icon-theme
+codium-insiders --install-extension formulahendry.auto-rename-tag
+codium-insiders --install-extension drewxs.tokyo-night-dark
+codium-insiders --install-extension cschlosser.doxdocgen
+codium-insiders --install-extension naumovs.color-highlight
+codium-insiders --install-extension usernamehw.errorlens
+#codium-insiders --install-extension pinage404.bash-extension-pack
+#codium-insiders --install-extension donjayamanne.python-extension-pack
+#codium-insiders --install-extension vscjava.vscode-java-pack
+#codium-insiders --install-extension ms-vscode.cpptools-extension-pack
+

@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+# Function to handle Ctrl+C (SIGINT) and exit immediately
+cleanup() {
+    echo -e "\nScript interrupted. Exiting immediately..."
+    exit 1
+}
+
+# Set trap to catch SIGINT (Ctrl+C) and call the cleanup function
+trap cleanup SIGINT
+
+# Define the packages categorized
+terminal_emulators=("kitty-git" "alacritty-git")
+file_managers=("thunar" "thunar-volman" "thunar-archive-plugin" "thunar-media-tags-plugin")
+file_utilities=("zip" "unzip")
+vfs=("gvfs" "gvfs-afc" "gvfs-google" "gvfs-gphoto2" "gvfs-mtp" "gvfs-nfs")
+fonts=("ttf-iosevkaterm-nerd" "ttf-jetbrains-mono-nerd" "ttf-meslo-nerd")
+code_editors=("vscodium-git" "sublime-text-4")
+web_browsers=("zen-browser-bin")
+development_tools=("gcc" "base-devel" "yay-git")
+shells=("fish-git")
+python_utilities=("python-pywal")
+system_utilities=("networkmanager" "archlinux-tweak-tool-git" "picom-jonaburg-git" "vimix-cursors" "gruvbox-material-theme-git" "gtk-engine-murrine" "lxappearance" "qt5ct" "qt6ct")
+messaging_media=("kotatogram-desktop-git" "stremio")
+
+# Function to check and install packages
+check_and_install() {
+    local package=$1
+    if ! pacman -Q "$package" &> /dev/null && ! yay -Q "$package" &> /dev/null; then
+        echo "Package $package not found. Installing..."
+        if pacman -Q "$package" &> /dev/null; then
+            sudo pacman -Syu --noconfirm "$package"
+        else
+            yay -Syu --noconfirm "$package"
+        fi
+    else
+        echo "Package $package is already installed."
+    fi
+}
+
+# Check and install terminal emulators
+for pkg in "${terminal_emulators[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install file managers
+for pkg in "${file_managers[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install file utilities
+for pkg in "${file_utilities[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install VFS packages
+for pkg in "${vfs[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install fonts
+for pkg in "${fonts[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install code editors
+for pkg in "${code_editors[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install web browsers
+for pkg in "${web_browsers[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install development tools
+for pkg in "${development_tools[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install shells
+for pkg in "${shells[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install Python utilities
+for pkg in "${python_utilities[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install system utilities
+for pkg in "${system_utilities[@]}"; do
+    check_and_install "$pkg"
+done
+
+# Check and install messaging and media apps
+for pkg in "${messaging_media[@]}"; do
+    check_and_install "$pkg"
+done
+
+echo "All specified packages have been checked and installed as needed."

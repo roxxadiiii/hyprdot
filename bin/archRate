@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rate-mirrors --allow-root arch | sudo tee /etc/pacman.d/mirrorlist
+
+echo "Close the Window"

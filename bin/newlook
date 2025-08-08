@@ -1,0 +1,19 @@
+#!/bin/sh
+wall=$(find ~/pix/walx -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
+
+
+/home/roxx/.local/bin/pywal2alac.sh
+wal -c
+wal -i "$wall"
+
+# List the monitors and their associated wallpaper paths
+xwallpaper --output eDP-1 --zoom "$wall"
+#xwallpaper --output HDMI-1 --zoom "$wall"
+#feh --fullscreen $wall
+#feh --bg-center $wall --no-fehbg --display :0.1 &
+# xwallpaper --zoom $wall
+
+# /home/roxx/.local/bin
+
+
+# xdotool key super+shift+r
